@@ -256,7 +256,7 @@ async function fetchRepositoryFiles(
       const pagePath = `${repoSlug}/${versionSlug}/${limitedFile.slug}`;
       const pageTitle = limitedFile.title || getTitleFromFile(limitedFile.name);
 
-      // console.debug(`1| Adding limited file: ${pagePath} (title: ${pageTitle})`);
+      console.debug(`1| Adding limited file: ${pagePath} (title: ${pageTitle})`);
 
       rawMarkdownFiles.set(pagePath, content);
 
