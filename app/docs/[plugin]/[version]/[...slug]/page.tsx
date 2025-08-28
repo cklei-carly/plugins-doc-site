@@ -105,11 +105,11 @@ export async function generateMetadata({ params }: Props) {
 }
 
 export async function generateStaticParams() {
-  if (isLocal) {
-    const localParams = source.generateParams();
-    // console.debug("### Local params:", localParams);
-    return localParams;
-  }
+  // if (isLocal) {
+  //   const localParams = source.generateParams();
+  //   // console.debug("### Local params:", localParams);
+  //   return localParams;
+  // }
   // Generate params for all repository and version combinations with their actual pages
   const params: { plugin: string; version: string; slug: string[] }[] = [];
 
