@@ -9,7 +9,7 @@ const FileNameRegex = /^\d\d-(.+)$/;
 //   process.env.NODE_ENV !== "production" || process.env.NEXT_PHASE === "phase-production-build";
 //   // process.env.ENV === "local" || process.env.NEXT_PHASE === "phase-production-build";
 export const isLocal =
-  process.env.LOCAL || process.env.NEXT_PHASE === "phase-production-build";
+  process.env.DOC_SOURCE === 'local'; // || process.env.NEXT_PHASE === "phase-production-build";
 
 export const source = loader({
   baseUrl: "/docs",
