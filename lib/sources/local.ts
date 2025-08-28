@@ -129,7 +129,7 @@ export async function buildMarkdownFileToLocal(files: Map<string,string>): Promi
     try {
 
       const realPath = path.join(dir, filePath + ".md");
-      console.debug("Writing local file:", realPath);
+      console.info("Writing local file:", realPath);
 
       // Ensure the directory exists before writing the file
       fs.mkdirSync(path.dirname(realPath), { recursive: true });
