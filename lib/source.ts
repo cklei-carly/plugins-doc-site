@@ -14,8 +14,8 @@ export const isLocal =
 export const source = loader({
   baseUrl: "/docs",
   // source: await createLocalSource(),
-  source: await createGitHubSource(),
-  // source: isLocal ? await createLocalSource() : await createGitHubSource(),
+  // source: await createGitHubSource(),
+  source: isLocal ? await createLocalSource() : await createGitHubSource(),
   slugs(info) {
     try {
       const segments = info.path

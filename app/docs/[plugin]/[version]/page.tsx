@@ -8,7 +8,7 @@ import {
 } from "@/lib/repo-config";
 import { notFound } from "next/navigation";
 import { DocPageHeading } from "../../components";
-import { source } from "@/lib/source";
+import { source, isLocal } from "@/lib/source";
 import { createMdxComponents, createRelativeLink } from "@/components/mdx";
 import { Cards, Card } from "fumadocs-ui/components/card";
 

@@ -4,7 +4,7 @@ const isStaticExport = process.env.NEXT_STATIC_EXPORT === "true";
 const isProd = process.env.NODE_ENV === "production";
 
 // GitHub Pages configuration
-const basePath = isProd && isStaticExport ? "/plugins-doc-site" : "";
+const basePath = isProd && isStaticExport ? (process.env.NEXT_PUBLIC_BASE_PATH || "/plugins-doc-site") : "";
 
 const nextConfig = {
   reactStrictMode: true,

@@ -3,6 +3,9 @@ import type { NextConfig } from "next";
 const isStaticExport = process.env.NEXT_STATIC_EXPORT === "true";
 const isProduction = process.env.NODE_ENV === "production";
 
+// GitHub Pages configuration
+const basePath = isProduction && isStaticExport ? (process.env.NEXT_PUBLIC_BASE_PATH || "/plugins-doc-site") : "";
+
 const config: NextConfig = {
   reactStrictMode: true,
   ...(isStaticExport && {
@@ -10,8 +13,8 @@ const config: NextConfig = {
     trailingSlash: true,
     skipTrailingSlashRedirect: true,
     ...(isProduction && {
-      basePath: "/plugins-doc-site",
-      assetPrefix: "/plugins-doc-site",
+      basePath: basePath,
+      assetPrefix: basePath,
     }),
   }),
   images: {
