@@ -178,13 +178,12 @@ function parseSourceBeforeCompile(filePath: string, source: string): string {
     }
   );
 
-  // Replace "`{{xxx}}`" as mdx accepted
+  // Replace "{{xxx}}" -> "\{\{xxx\}\}"
   parsedSource = parsedSource.replace(
-    /`{{\s*(.*?)\s*}}`/g,
-    (match: string, p1: string) => {
-      return `\${{ ${p1} }}`;
-    }
+    /{{\s*(.*?)\s*}}/g,
+    '\\{\\{$1\\}\\}',
   );
+
 
   return parsedSource;
 }
