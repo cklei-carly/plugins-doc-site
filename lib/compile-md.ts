@@ -138,12 +138,6 @@ function parseSourceBeforeCompile(filePath: string, source: string): string {
     }
   );
 
-  // Replace "{{xxx}}" -> "\{\{xxx\}\}"
-  parsedSource = parsedSource.replace(
-    /{{\s*(.*?)\s*}}/g,
-    '\\{\\{$1\\}\\}',
-  );
-
   return parsedSource;
 }
 
