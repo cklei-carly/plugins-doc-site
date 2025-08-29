@@ -71,7 +71,7 @@ const rawRepositories = [
     description: 'Effortlessly manage your newsletters with our Filament Newsletter package, designed for seamless integration with the Filament Admin Panel. Enjoy flexible and user-friendly email marketing directly within your admin panel.',
     repository_url: 'https://github.com/solutionforest/filaletter',
     latest_version: '3.x',
-    is_private: true,
+    is_private: false,
     versions: [
       {
         version: '2.x',
