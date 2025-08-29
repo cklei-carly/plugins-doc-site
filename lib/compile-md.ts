@@ -130,11 +130,59 @@ function parseSourceBeforeCompile(filePath: string, source: string): string {
     '<div class="note">$1</div>',
   );
 
-  // Replace "style="xx" as mdx format
+  // Fix type annotations that get interpreted as HTML tags
+  // Replace array<type> with array&lt;type&gt; to prevent HTML parsing
   parsedSource = parsedSource.replace(
-    /style="([^"]+)"/g,
-    (match, p1) => {
-      return `style={{ ${p1} }}`;
+    /array<([^>]+)>/g,
+    'array&lt;$1&gt;',
+  );
+
+  // Fix standalone type annotations at start of lines or after colons/spaces
+  // This handles cases like "- `id`: int" -> "- `id`: `int`"
+  parsedSource = parsedSource.replace(
+    /(\s+- `[^`]+`):\s+(int|string|bool|float|double|object|array)(\s|$)/g,
+    '$1: `$2`$3',
+  );
+
+  // Fix type annotations in parameter lists
+  // This handles cases like "- **tags**: array<int> (optional)"
+  parsedSource = parsedSource.replace(
+    /(\*\*[^*]+\*\*):\s+(array&lt;[^&]+&gt;|int|string|bool|float|double|object|array)(\s)/g,
+    '$1: `$2`$3',
+  );
+
+  // Replace "style="xx" as mdx format  
+  // Convert CSS style attributes to JSX format
+  parsedSource = parsedSource.replace(
+    /style\s*=\s*"([^"]+)"/g,
+    (match: string, styleValue: string): string => {
+      // Parse CSS properties and convert to JSX object
+      const styles = styleValue
+        .split(';')
+        .filter((prop: string) => prop.trim())
+        .map((prop: string) => {
+          const [property, ...valueParts] = prop.split(':');
+          const value = valueParts.join(':').trim(); // Handle values with colons
+          const trimmedProperty = property.trim();
+          
+          if (!trimmedProperty || !value) return '';
+          
+          // Convert kebab-case to camelCase
+          const camelProperty = trimmedProperty.replace(/-([a-z])/g, (_, letter: string) => letter.toUpperCase());
+          return `${camelProperty}: "${value}"`;
+        })
+        .filter((prop: string) => prop)
+        .join(', ');
+      
+      return `style={{ ${styles} }}`;
+    }
+  );
+
+  // Replace "`{{xxx}}`" as mdx accepted
+  parsedSource = parsedSource.replace(
+    /`{{\s*(.*?)\s*}}`/g,
+    (match: string, p1: string) => {
+      return `\${{ ${p1} }}`;
     }
   );
 
