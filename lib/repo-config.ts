@@ -33,40 +33,40 @@ function parseRepositoryUrl(url: string): { owner: string; repo: string } {
 // Sample repositories from your JSON
 
 const rawRepositories = [
-  // {
-  //   description:
-  //     "A comprehensive CMS website plugin for Filament that provides content management capabilities with pages, posts, and media management.",
-  //   repository_url:
-  //     "https://github.com/solutionforest/filament-cms-website-plugin",
-  //   latest_version: "3.x",
-  //   is_private: true,
-  //   versions: [
-  //     {
-  //       version: "1.x",
-  //       github_branch: "1.x",
-  //       limited_files: [
-  //         { name: "README.md", title: "Overview", slug: "overview" },
-  //         { name: "Documentation.md", title: "Documentation", slug: "docs" },
-  //       ],
-  //     },
-  //     {
-  //       version: "2.x",
-  //       github_branch: "2.x",
-  //       limited_files: [
-  //         { name: "README.md", title: "Overview", slug: "overview" },
-  //         { name: "Documentation.md", title: "Documentation", slug: "docs" },
-  //       ],
-  //     },
-  //     {
-  //       version: "3.x",
-  //       github_branch: "3.x",
-  //       limited_files: [
-  //         { name: "README.md", title: "Overview", slug: "overview" },
-  //         { name: "Documentation.md", title: "Documentation", slug: "docs" },
-  //       ],
-  //     },
-  //   ],
-  // },
+  {
+    description:
+      "A comprehensive CMS website plugin for Filament that provides content management capabilities with pages, posts, and media management.",
+    repository_url:
+      "https://github.com/solutionforest/filament-cms-website-plugin",
+    latest_version: "3.x",
+    is_private: true,
+    versions: [
+      {
+        version: "1.x",
+        github_branch: "1.x",
+        limited_files: [
+          { name: "README.md", title: "Overview", slug: "overview" },
+          { name: "Documentation.md", title: "Documentation", slug: "docs" },
+        ],
+      },
+      {
+        version: "2.x",
+        github_branch: "2.x",
+        limited_files: [
+          { name: "README.md", title: "Overview", slug: "overview" },
+          { name: "Documentation.md", title: "Documentation", slug: "docs" },
+        ],
+      },
+      {
+        version: "3.x",
+        github_branch: "3.x",
+        limited_files: [
+          { name: "README.md", title: "Overview", slug: "overview" },
+          { name: "Documentation.md", title: "Documentation", slug: "docs" },
+        ],
+      },
+    ],
+  },
   {
     description: 'Effortlessly manage your newsletters with our Filament Newsletter package, designed for seamless integration with the Filament Admin Panel. Enjoy flexible and user-friendly email marketing directly within your admin panel.',
     repository_url: 'https://github.com/solutionforest/filaletter',
