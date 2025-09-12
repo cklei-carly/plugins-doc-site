@@ -43,7 +43,7 @@ export async function createLocalSource(): Promise<
         type: "meta",
         path: relativePath,
         data: JSON.parse(metaContent)
-      }
+      } satisfies VirtualFile;
       // console.warn(
       //   "We do not handle .json files at the moment, you need to hardcode them",
       // );
