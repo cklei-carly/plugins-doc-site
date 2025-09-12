@@ -11,7 +11,7 @@ import {
   type VersionConfig,
 } from "../repo-config";
 import { cache as reactCache } from 'react';
-import { buildMarkdownFileToLocal } from "./local";
+import { buildMarkdownFileToLocal, buildMetaJson } from "./local";
 
 const token = process.env.GITHUB_TOKEN;
 if (!token) throw new Error(`environment variable GITHUB_TOKEN is needed.`);
@@ -388,6 +388,8 @@ async function fetchRepositoryFiles(
   }
 
   await buildMarkdownFileToLocal(rawMarkdownFiles);
+
+  buildMetaJson(allFiles);
 
   return allFiles;
 }

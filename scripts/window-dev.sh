@@ -1,1 +1,1 @@
-$env:DOC_SOURCE="local"; pnpm dev
+$env:NEXT_DOC_SOURCE="local"; pnpm dev

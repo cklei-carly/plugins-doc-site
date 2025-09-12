@@ -37,10 +37,17 @@ export async function createLocalSource(): Promise<
   const pages = files.flatMap((file) => {
     const relativePath = path.relative(dir, file);
     if (path.extname(file) === ".json") {
-      console.warn(
-        "We do not handle .json files at the moment, you need to hardcode them",
-      );
-      return [];
+      const metaContent = fs.readFileSync(file, "utf-8");
+      // console.debug("Loaded JSON meta content:", metaContent);
+      return {
+        type: "meta",
+        path: relativePath,
+        data: JSON.parse(metaContent)
+      }
+      // console.warn(
+      //   "We do not handle .json files at the moment, you need to hardcode them",
+      // );
+      // return [];
     }
 
     // Parse the path structure: {repo}/{version}/{file}
@@ -79,9 +86,9 @@ export async function createLocalSource(): Promise<
     // Create the path for fumadocs
     const pagePath = `${repoSlug}/${version}/${getBaseFileName(fileName)}`;
 
-    console.debug(
-      `Adding local page: ${pagePath} (title: ${getTitleFromFile(fileName)})`,
-    );
+    // console.debug(
+    //   `Adding local page: ${pagePath} (title: ${getTitleFromFile(fileName)})`,
+    // );
 
     return {
       type: "page",
@@ -141,5 +148,18 @@ export async function buildMarkdownFileToLocal(files: Map<string,string>): Promi
     } catch (error) {
       console.error(`Failed to write local file for ${filePath}:`, error);
     }
+  }
+}
+
+export function buildMetaJson(files: VirtualFile[]): void {
+  for (const file of files) {
+    if (file.type !== 'meta' || !file.path.endsWith('.json')) continue;
+
+    const json = JSON.stringify(file.data, null, 2);
+    const filePath = path.join(dir, file.path);
+
+    console.info("Writing meta JSON file:", filePath);
+
+    fs.writeFileSync(filePath, json);
   }
 }

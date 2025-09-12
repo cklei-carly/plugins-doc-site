@@ -166,9 +166,12 @@ const mdxComponents = {
       : defaultHeight;
 
     let url = props.src;
-    // if (url.startsWith('./') || url.startsWith('../')) {
-    //   url = siteConfig.baseUrl + '/' + url;
-    // }
+    if (url.startsWith('./') || url.startsWith('../')) {
+      // url = siteConfig.baseUrl + '/' + url;
+      return '[Image failed to load]';
+    }
+
+    // console.debug("### ImageZoom URL:", url);
 
     return (
       <div className="not-prose my-6 rounded-xl p-1 bg-gradient-to-br from-white/10 to-black/10 border shadow-lg">
@@ -245,7 +248,12 @@ export function createRelativeLink(
   // }
 
   let repositoryUrl = `${repository.repository_url}/blob/${version.github_branch || version.version}/${href}`;
-  // console.debug("### Creating relative link for:", href, repositoryUrl);
+
+  if (repository.repo === 'filaletter') {
+    repositoryUrl = `${repository.repository_url}/blob/${version.github_branch || version.version}/${repository.docsPath}/${href}`;
+  }
+
+  console.debug("### Creating relative link for:", href, repositoryUrl);
 
   return repositoryUrl;
 }
